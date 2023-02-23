@@ -23,16 +23,16 @@ const saveFileVersionID =
   1939327491;  // Uint32 id to check if save file is compatible
 
 const guiControls_default = {
-  vorticity: 10.005,
+  vorticity: 0.005,
   dragMultiplier: 0.01,  // 0.1
-  wind: 100000.0001,
+  wind: 10000.0001,
   globalEffectsHeight: 5000,
   globalDrying: 0.00001,
   globalHeating: 0.0,
   sunIntensity: 1.0,
   waterTemperature: 25,  // only in degrees C, sorry Americans
   landEvaporation: 0.00005,
-  waterEvaporation: 0.0001,
+  waterEvaporation: 1000.0001,
   evapHeat: 1.9,     // 1.9    Real: 2260 J/g
   meltingHeat: 0.6,  // 0.281  Real:  334 J/g
   waterWeight: 0.5,  // 0.50
@@ -66,7 +66,7 @@ const guiControls_default = {
   IterPerFrame: 10,
   auto_IterPerFrame: true,
   dryLapseRate: 10.0,    // Real: 9.81 degrees / km
-  simHeight: 1200000,      // meters 
+  simHeight: 12000,      // meters 
   imperialUnits: false,  // only for display.  false = metric
 };
 
@@ -197,7 +197,7 @@ function IR_temp(IR) {
 
 ////////////// Water Functions ///////////////
 const wf_devider = 250.0;
-const wf_pow = 17.0;
+const wf_pow = 20.0; //17 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function maxWater(Td) {
   return Math.pow(
@@ -213,7 +213,7 @@ function dewpoint(W) {
 }
 
 function relativeHumd(T, W) {
-  return (W / maxWater(T)) * 100.0;
+  return (W / maxWater(T)) * 200.0;//100
 }
 
 // Print funtions:
@@ -624,7 +624,7 @@ async function mainScript(
       })
       .name('Vorticity');
 
-    fluidParams_folder.add(guiControls, 'dragMultiplier', 0.0, 1.0, 0.01)
+    fluidParams_folder.add(guiControls, 'dragMultiplier', 0.0, 5.0, 0.01)
       .onChange(function () {
         gl.useProgram(velocityProgram);
         gl.uniform1f(
@@ -633,7 +633,7 @@ async function mainScript(
       })
       .name('Drag');
 
-    fluidParams_folder.add(guiControls, 'wind', -1.0, 1.0, 0.01)
+    fluidParams_folder.add(guiControls, 'wind', -1.0, 100.0, 0.1)
       .onChange(function () {
         gl.useProgram(velocityProgram);
         gl.uniform1f(
@@ -756,7 +756,7 @@ async function mainScript(
 
     var water_folder = datGui.addFolder('Water');
 
-    water_folder.add(guiControls, 'waterTemperature', 0.0, 35.0, 0.1)
+    water_folder.add(guiControls, 'waterTemperature', -35.0, 35.0, 1.0)
       .onChange(function () {
         gl.useProgram(boundaryProgram);
         gl.uniform1f(
