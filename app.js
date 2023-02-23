@@ -32,7 +32,7 @@ const guiControls_default = {
   sunIntensity: 1.0,
   waterTemperature: 25,  // only in degrees C, sorry Americans
   landEvaporation: 0.00005,
-  waterEvaporation: 1000.0001,
+  waterEvaporation: 0.0001,
   evapHeat: 1.9,     // 1.9    Real: 2260 J/g
   meltingHeat: 0.6,  // 0.281  Real:  334 J/g
   waterWeight: 0.5,  // 0.50
