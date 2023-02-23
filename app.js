@@ -12,7 +12,7 @@ with this program. If not, see <https://www.gnu.org/licenses/>.
 var canvas;
 var gl;
 
-var SETUP_MODE = false;
+var SETUP_MODE = true;
 
 var loadingBar;
 
@@ -25,7 +25,7 @@ const saveFileVersionID =
 const guiControls_default = {
   vorticity: 0.005,
   dragMultiplier: 0.01,  // 0.1
-  wind: -0.0001,
+  wind: 1000.0001,
   globalEffectsHeight: 5000,
   globalDrying: 0.00001,
   globalHeating: 0.0,
