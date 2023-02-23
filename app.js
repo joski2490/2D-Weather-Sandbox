@@ -25,11 +25,11 @@ const saveFileVersionID =
 const guiControls_default = {
   vorticity: 0.005,
   dragMultiplier: 0.01,  // 0.1
-  wind: 1000.0001,
+  wind: -100.0001,
   globalEffectsHeight: 5000,
   globalDrying: 0.00001,
   globalHeating: 0.0,
-  sunIntensity: 1.0,
+  sunIntensity: 100.0,
   waterTemperature: 25,  // only in degrees C, sorry Americans
   landEvaporation: 0.00005,
   waterEvaporation: 0.0001,
@@ -66,7 +66,7 @@ const guiControls_default = {
   IterPerFrame: 10,
   auto_IterPerFrame: true,
   dryLapseRate: 10.0,    // Real: 9.81 degrees / km
-  simHeight: 12000,      // meters 
+  simHeight: 1200,      // meters 
   imperialUnits: false,  // only for display.  false = metric
 };
 
