@@ -12,7 +12,7 @@ with this program. If not, see <https://www.gnu.org/licenses/>.
 var canvas;
 var gl;
 
-var SETUP_MODE = false;
+var SETUP_MODE = true;
 
 var loadingBar;
 
