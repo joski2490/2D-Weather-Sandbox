@@ -67,7 +67,7 @@ const guiControls_default = {
   auto_IterPerFrame: true,
   dryLapseRate: 10.0,    // Real: 9.81 degrees / km
   simHeight: 12000,      // meters 
-  imperialUnits: false,  // only for display.  false = metric
+  imperialUnits: true,  // only for display.  false = metric
 };
 
 var guiControls;
@@ -94,7 +94,7 @@ var viewXpos = 0.0;
 var viewYpos = 0.0;
 var viewZoom = 1.0001;
 
-const timePerIteration = 0.00088; // (0.00008 = 0.288 sec) in hours
+const timePerIteration = 0.00888; // (0.00008 = 0.288 sec) in hours
 
 var NUM_DROPLETS;
 // NUM_DROPLETS = (sim_res_x * sim_res_y) / NUM_DROPLETS_DEVIDER
@@ -197,7 +197,7 @@ function IR_temp(IR) {
 
 ////////////// Water Functions ///////////////
 const wf_devider = 250.0;
-const wf_pow = 20.0; //17 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const wf_pow = 17.0; //17 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function maxWater(Td) {
   return Math.pow(
@@ -213,7 +213,7 @@ function dewpoint(W) {
 }
 
 function relativeHumd(T, W) {
-  return (W / maxWater(T)) * 200.0;//100
+  return (W / maxWater(T)) * 100.0;//100
 }
 
 // Print funtions:
@@ -615,7 +615,7 @@ async function mainScript(
 
     var fluidParams_folder = datGui.addFolder('Fluid');
 
-    fluidParams_folder.add(guiControls, 'vorticity', 0.0, 0.10, 0.001)
+    fluidParams_folder.add(guiControls, 'vorticity', 0.0, 0.10, 0.0001)
       .onChange(function () {
         gl.useProgram(boundaryProgram);
         gl.uniform1f(
@@ -633,7 +633,7 @@ async function mainScript(
       })
       .name('Drag');
 
-    fluidParams_folder.add(guiControls, 'wind', -200.0, 200.0, 1.0)
+    fluidParams_folder.add(guiControls, 'wind', -200.0, 200.0, 0.001)
       .onChange(function () {
         gl.useProgram(velocityProgram);
         gl.uniform1f(
@@ -650,7 +650,7 @@ async function mainScript(
       })
       .name('Global Drying');
 
-    fluidParams_folder.add(guiControls, 'globalHeating', -0.008, 0.008, 0.0004)
+    fluidParams_folder.add(guiControls, 'globalHeating', -0.008, 0.008, 0.0001)
       .onChange(function () {
         gl.useProgram(advectionProgram);
         gl.uniform1f(
@@ -692,7 +692,7 @@ async function mainScript(
       .name('Brush Diameter')
       .listen();
     UI_folder.add(guiControls, 'wholeWidth').name('Whole Width Brush').listen();
-    UI_folder.add(guiControls, 'intensity', 0.001, 0.5, 0.01)
+    UI_folder.add(guiControls, 'intensity', 0.001, 0.5, 0.001)
       .name('Brush Intensity');
 
     var radiation_folder = datGui.addFolder('Radiation');
@@ -736,7 +736,7 @@ async function mainScript(
       })
       .name('Sun Intensity');
 
-    radiation_folder.add(guiControls, 'greenhouseGases', 0.0, 0.01, 0.0001)
+    radiation_folder.add(guiControls, 'greenhouseGases', 0.0, 0.03, 0.0001)
       .onChange(function () {
         gl.useProgram(lightingProgram);
         gl.uniform1f(
@@ -756,7 +756,7 @@ async function mainScript(
 
     var water_folder = datGui.addFolder('Water');
 
-    water_folder.add(guiControls, 'waterTemperature', -65.0, 95.0, 2.0)
+    water_folder.add(guiControls, 'waterTemperature', -65.0, 95.0, 1.0)
       .onChange(function () {
         gl.useProgram(boundaryProgram);
         gl.uniform1f(
@@ -776,7 +776,7 @@ async function mainScript(
           guiControls.landEvaporation);
       })
       .name('Land Evaporation');
-    water_folder.add(guiControls, 'waterEvaporation', 0.0, 0.4, 0.01)
+    water_folder.add(guiControls, 'waterEvaporation', 0.0, 0.2, 0.001)
       .onChange(function () {
         gl.useProgram(boundaryProgram);
         gl.uniform1f(
@@ -784,7 +784,7 @@ async function mainScript(
           guiControls.waterEvaporation);
       })
       .name('Lake / Sea Evaporation');
-    water_folder.add(guiControls, 'evapHeat', -5.0, 5.0, 0.5)
+    water_folder.add(guiControls, 'evapHeat', 0.0, 5.0, 0.1)
       .onChange(function () {
         gl.useProgram(advectionProgram);
         gl.uniform1f(
@@ -812,7 +812,7 @@ async function mainScript(
           guiControls.meltingHeat);
       })
       .name('Melting Heat');
-    water_folder.add(guiControls, 'waterWeight', 0.0, 5.0, 0.3)
+    water_folder.add(guiControls, 'waterWeight', 0.01, 2.0, 0.01)
       .onChange(function () {
         gl.useProgram(boundaryProgram);
         gl.uniform1f(
