@@ -615,7 +615,7 @@ async function mainScript(
 
     var fluidParams_folder = datGui.addFolder('Fluid');
 
-    fluidParams_folder.add(guiControls, 'vorticity', 0.0, 0.010, 0.001)
+    fluidParams_folder.add(guiControls, 'vorticity', 0.0, 0.10, 0.001)
       .onChange(function () {
         gl.useProgram(boundaryProgram);
         gl.uniform1f(
@@ -633,7 +633,7 @@ async function mainScript(
       })
       .name('Drag');
 
-    fluidParams_folder.add(guiControls, 'wind', -1.0, 100.0, 0.1)
+    fluidParams_folder.add(guiControls, 'wind', -200.0, 200.0, 1.0)
       .onChange(function () {
         gl.useProgram(velocityProgram);
         gl.uniform1f(
@@ -641,7 +641,7 @@ async function mainScript(
       })
       .name('Wind');
 
-    fluidParams_folder.add(guiControls, 'globalDrying', 0.0, 0.001, 0.00001)
+    fluidParams_folder.add(guiControls, 'globalDrying', 0.0, 0.1, 0.001)
       .onChange(function () {
         gl.useProgram(advectionProgram);
         gl.uniform1f(
@@ -650,7 +650,7 @@ async function mainScript(
       })
       .name('Global Drying');
 
-    fluidParams_folder.add(guiControls, 'globalHeating', -0.002, 0.002, 0.0001)
+    fluidParams_folder.add(guiControls, 'globalHeating', -0.008, 0.008, 0.0004)
       .onChange(function () {
         gl.useProgram(advectionProgram);
         gl.uniform1f(
@@ -692,7 +692,7 @@ async function mainScript(
       .name('Brush Diameter')
       .listen();
     UI_folder.add(guiControls, 'wholeWidth').name('Whole Width Brush').listen();
-    UI_folder.add(guiControls, 'intensity', 0.005, 0.05, 0.001)
+    UI_folder.add(guiControls, 'intensity', 0.001, 0.5, 0.01)
       .name('Brush Intensity');
 
     var radiation_folder = datGui.addFolder('Radiation');
@@ -756,7 +756,7 @@ async function mainScript(
 
     var water_folder = datGui.addFolder('Water');
 
-    water_folder.add(guiControls, 'waterTemperature', -35.0, 35.0, 1.0)
+    water_folder.add(guiControls, 'waterTemperature', -65.0, 95.0, 2.0)
       .onChange(function () {
         gl.useProgram(boundaryProgram);
         gl.uniform1f(
@@ -768,7 +768,7 @@ async function mainScript(
           CtoK(guiControls.waterTemperature));
       })
       .name('Lake / Sea Temp (°C)');
-    water_folder.add(guiControls, 'landEvaporation', 0.0, 0.0002, 0.00001)
+    water_folder.add(guiControls, 'landEvaporation', 0.0, 0.02, 0.001)
       .onChange(function () {
         gl.useProgram(boundaryProgram);
         gl.uniform1f(
@@ -776,7 +776,7 @@ async function mainScript(
           guiControls.landEvaporation);
       })
       .name('Land Evaporation');
-    water_folder.add(guiControls, 'waterEvaporation', 0.0, 0.0004, 0.00001)
+    water_folder.add(guiControls, 'waterEvaporation', 0.0, 0.4, 0.01)
       .onChange(function () {
         gl.useProgram(boundaryProgram);
         gl.uniform1f(
@@ -784,7 +784,7 @@ async function mainScript(
           guiControls.waterEvaporation);
       })
       .name('Lake / Sea Evaporation');
-    water_folder.add(guiControls, 'evapHeat', 0.0, 5.0, 0.1)
+    water_folder.add(guiControls, 'evapHeat', -5.0, 5.0, 0.5)
       .onChange(function () {
         gl.useProgram(advectionProgram);
         gl.uniform1f(
@@ -812,7 +812,7 @@ async function mainScript(
           guiControls.meltingHeat);
       })
       .name('Melting Heat');
-    water_folder.add(guiControls, 'waterWeight', 0.0, 2.0, 0.01)
+    water_folder.add(guiControls, 'waterWeight', 0.0, 5.0, 0.3)
       .onChange(function () {
         gl.useProgram(boundaryProgram);
         gl.uniform1f(
