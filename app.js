@@ -94,7 +94,7 @@ var viewXpos = 0.0;
 var viewYpos = 0.0;
 var viewZoom = 1.0001;
 
-const timePerIteration = 0.00008; // (0.00008 = 0.288 sec) in hours
+const timePerIteration = 0.00088; // (0.00008 = 0.288 sec) in hours
 
 var NUM_DROPLETS;
 // NUM_DROPLETS = (sim_res_x * sim_res_y) / NUM_DROPLETS_DEVIDER
